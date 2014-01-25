@@ -3,12 +3,12 @@
 // これはどこにおけば良いのやら。。
 var metainfo = {
   records: [
-    {property: "id"},
-    {property: "name"},
+    {property: "id", label: "ID"},
+    {property: "name", label: "Name"},
   ]
 };
 
-angular.module('magicTableApp')
+var module = angular.module('magicTableApp')
   .controller('MainCtrl', ['$scope', function ($scope) {
   $scope.positions = [{ Name: "Quarterback", Code: "QB" },
                                { Name: "Wide Receiver", Code: "WR" }
@@ -18,8 +18,20 @@ angular.module('magicTableApp')
       {id: 2, name: "brian"},
       {id: 3, name: "canal"}
     ];
-  }])
-.directive("record", function(){
+  }]);
+
+module.directive('head', function(){
+  var buildHeader = function() {
+    return '<tr>' + jQuery.map(metainfo.records, function(e) {
+      return '<td>' + e.label + '</td>';
+    }) + '</tr>';
+  }
+  return {
+    template: (function(){ return buildHeader()})()
+  }
+});
+
+module.directive("record", function(){
      var buildRow = function() {
        var tds = new Array();
        for (var i = 0; i < metainfo.records.length; i++) {
@@ -37,3 +49,4 @@ angular.module('magicTableApp')
         }
     }
 });
+
