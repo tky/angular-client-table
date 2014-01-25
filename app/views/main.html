@@ -3,6 +3,7 @@
 </div>
 
 <table class="table table-striped">
+  <tr filter></tr>
   <tr head></tr>
-  <tr ng-repeat="record in records | orderBy:predicate:reverse" record="record"></tr>
+  <tr ng-repeat="record in records | filter: query | orderBy:predicate:reverse" record="record"></tr>
 </table>

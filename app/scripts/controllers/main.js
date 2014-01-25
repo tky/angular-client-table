@@ -3,8 +3,8 @@
 // これはどこにおけば良いのやら。。
 var metainfo = {
   records: [
-    {property: "id", label: "ID", sort: false},
-    {property: "name", label: "Name", sort: true},
+    {property: "id", label: "ID", sort: false, filter: false},
+    {property: "name", label: "Name", sort: true, filter: true},
   ]
 };
 
@@ -19,6 +19,21 @@ var module = angular.module('magicTableApp')
       {id: 3, name: "canal"}
     ];
   }]);
+
+module.directive('filter', function(){
+  var buildHeader = function() {
+    return jQuery.map(metainfo.records, function(e) {
+      if (e.sort) {
+        return '<input type="text" ng-model="query.name" />';
+      } else {
+        return '<td></td>';
+      }
+    });
+  }
+  return {
+    template: (function(){ return buildHeader()})()
+  }
+});
 
 module.directive('head', function(){
   var buildHeader = function() {
