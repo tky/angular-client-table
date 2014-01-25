@@ -10,13 +10,22 @@ var metainfo = {
 
 var module = angular.module('magicTableApp')
   .controller('MainCtrl', ['$scope', function ($scope) {
-  $scope.positions = [{ Name: "Quarterback", Code: "QB" },
-                               { Name: "Wide Receiver", Code: "WR" }
-                              ]; 
+  $scope.currentPage = 0;
+  $scope.pageSize = 2;
+                              
+  $scope.numberOfPages = function() {
+    if ($scope.filteredRecords) {
+      return Math.ceil($scope.filteredRecords.length / $scope.pageSize);
+    } else {
+      return 0;
+    }
+  }
+
     $scope.records = [
       {id: 1, name: "andy"},
       {id: 2, name: "brian"},
-      {id: 3, name: "canal"}
+      {id: 3, name: "canal"},
+      {id: 4, name: "dany"}
     ];
   }]);
 
@@ -24,7 +33,7 @@ module.directive('filter', function(){
   var buildHeader = function() {
     return jQuery.map(metainfo.records, function(e) {
       if (e.sort) {
-        return '<input type="text" ng-model="query.name" />';
+        return '<input type="text" ng-model="query.name" ng-change="currentPage = 0"/>';
       } else {
         return '<td></td>';
       }
@@ -69,3 +78,12 @@ module.directive("record", function(){
     }
 });
 
+module.filter('startFrom', function() {
+    return function(input, start) {
+        if (!input) {
+          return input;
+        }
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+});

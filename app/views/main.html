@@ -2,8 +2,15 @@
   <h3 class="text-muted">magic table</h3>
 </div>
 
+  <button ng-disabled="currentPage == 0" ng-click="currentPage = currentPage - 1">
+    Previous
+  </button>
+    {{currentPage + 1}}/{{numberOfPages()}}
+    <button ng-disabled="currentPage + 1 >= numberOfPages()" ng-click="currentPage = currentPage + 1">
+      Next
+  </button>
 <table class="table table-striped">
   <tr filter></tr>
   <tr head></tr>
-  <tr ng-repeat="record in records | filter: query | orderBy:predicate:reverse" record="record"></tr>
+  <tr ng-repeat="record in (filteredRecords = (records | filter: query) | orderBy:predicate:reverse | startFrom: currentPage * pageSize | limitTo: pageSize)" record="record"></tr>
 </table>
