@@ -3,8 +3,9 @@
 // これはどこにおけば良いのやら。。
 var metainfo = {
   records: [
-    {property: "id", label: "ID", sort: false, filter: false},
-    {property: "name", label: "Name", sort: true, filter: true},
+    {property: "id", label: "ID", sort: false, filter: false, defaultDisplay: true},
+    {property: "name", label: "Name", sort: true, filter: true, defaultDisplay: true},
+    {property: "description", label: "Description", sort: true, filter: true, defaultDisplay: false},
   ]
 };
 
@@ -22,7 +23,7 @@ var module = angular.module('magicTableApp')
   }
 
     $scope.records = [
-      {id: 1, name: "andy"},
+      {id: 1, name: "andy", description: "aaa"},
       {id: 2, name: "brian"},
       {id: 3, name: "canal"},
       {id: 4, name: "dany"},
@@ -41,7 +42,7 @@ module.directive('filter', function(){
   var buildHeader = function() {
     return jQuery.map(metainfo.records, function(e) {
       if (e.sort) {
-        return '<input type="text" ng-model="query.name" ng-change="currentPage = 0"/>';
+        return '<td><input type="text" ng-model="query.' + e.property + '" ng-change="currentPage = 0"/></td>';
       } else {
         return '<td></td>';
       }
