@@ -4,5 +4,5 @@
 
 <table class="table table-striped">
   <tr head></tr>
-  <tr ng-repeat="record in records" record="record"></tr>
+  <tr ng-repeat="record in records | orderBy:predicate:reverse" record="record"></tr>
 </table>
