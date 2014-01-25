@@ -3,9 +3,8 @@
 // これはどこにおけば良いのやら。。
 var metainfo = {
   records: [
-    {property: "id", label: "ID", sort: false, filter: false, defaultDisplay: true},
-    {property: "name", label: "Name", sort: true, filter: true, defaultDisplay: true},
-    {property: "description", label: "Description", sort: true, filter: true, defaultDisplay: false},
+    {property: "id", label: "ID", sort: false, filter: false},
+    {property: "name", label: "Name", sort: true, filter: true}
   ]
 };
 
@@ -14,6 +13,9 @@ var module = angular.module('magicTableApp')
   $scope.currentPage = 0;
   $scope.pageSize = 10;
                               
+  $scope.getMetaInfo = function() {
+    return metainfo;
+  };
   $scope.numberOfPages = function() {
     if ($scope.filteredRecords) {
       return Math.ceil($scope.filteredRecords.length / $scope.pageSize);
@@ -73,7 +75,7 @@ module.directive("record", function(){
        var tds = new Array();
        for (var i = 0; i < metainfo.records.length; i++) {
          var m = metainfo.records[i];
-         tds[i] = '<td>{{record["' + m.property + '"]}}</td>';
+         tds[i] = '<td>' + '{{record["' + m.property + '"]}}</td>';
        }
        var v =  tds.join('') ;
        return v;
