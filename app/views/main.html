@@ -2,6 +2,12 @@
   <h3 class="text-muted">magic table</h3>
 </div>
 
+  <select ng-model="pageSize" ng-change="currentPage = 0">
+    <option>10</option>
+    <option>20</option>
+    <option>30</option>
+  </select>
+
   <button ng-disabled="currentPage == 0" ng-click="currentPage = currentPage - 1">
     Previous
   </button>

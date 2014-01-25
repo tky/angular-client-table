@@ -11,7 +11,7 @@ var metainfo = {
 var module = angular.module('magicTableApp')
   .controller('MainCtrl', ['$scope', function ($scope) {
   $scope.currentPage = 0;
-  $scope.pageSize = 2;
+  $scope.pageSize = 10;
                               
   $scope.numberOfPages = function() {
     if ($scope.filteredRecords) {
@@ -25,7 +25,15 @@ var module = angular.module('magicTableApp')
       {id: 1, name: "andy"},
       {id: 2, name: "brian"},
       {id: 3, name: "canal"},
-      {id: 4, name: "dany"}
+      {id: 4, name: "dany"},
+      {id: 5, name: "elen"},
+      {id: 6, name: "fany"},
+      {id: 7, name: "geronica"},
+      {id: 8, name: "hera"},
+      {id: 9, name: "ira"},
+      {id: 10, name: "jenkins"},
+      {id: 11, name: "lenda"},
+      {id: 12, name: "murata"}
     ];
   }]);
 
