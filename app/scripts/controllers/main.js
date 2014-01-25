@@ -22,9 +22,9 @@ var module = angular.module('magicTableApp')
 
 module.directive('head', function(){
   var buildHeader = function() {
-    return '<tr>' + jQuery.map(metainfo.records, function(e) {
+    return jQuery.map(metainfo.records, function(e) {
       return '<td>' + e.label + '</td>';
-    }) + '</tr>';
+    });
   }
   return {
     template: (function(){ return buildHeader()})()
@@ -38,7 +38,7 @@ module.directive("record", function(){
          var m = metainfo.records[i];
          tds[i] = '<td>{{record["' + m.property + '"]}}</td>';
        }
-       var v =  '<tr>' + tds.join('') + '</tr>';
+       var v =  tds.join('') ;
        return v;
      };
     return {
