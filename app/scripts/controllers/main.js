@@ -1,6 +1,6 @@
 'use strict';
 
-// これはどこにおけば良いのやら。。
+// I wander where shoud I put this code...
 var metainfo = {
   records: [
     {property: "id", label: "ID", sort: false, filter: false},
